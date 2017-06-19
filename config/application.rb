@@ -11,5 +11,13 @@ module RailsBoilerplate
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
+
+    # CORS
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins 'localhost:9000', 'production.shiip.io'
+        resource '*', :headers => :any, :methods => [:get, :post, :options, :delete, :put, :patch], :expose  => ['access-token', 'expiry', 'token-type', 'uid', 'client']
+      end
+    end
   end
 end
